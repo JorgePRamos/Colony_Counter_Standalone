@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = OpenCvImplementation
-build_property.ProjectDir = D:\Code\.NET\Open_Cv_Implementation\OpenCvImplementation\OpenCvImplementation\
+build_property.ProjectDir = D:\Code\.NET\Colony_Counter_Standalone\OpenCv_Implementation\OpenCvImplementation\

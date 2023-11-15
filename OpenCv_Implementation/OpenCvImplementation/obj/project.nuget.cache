@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AnuPrnoXu/VVDKZRi6Xfq1MH0gbtriseF0a1QFK61JKfFyOK9jB51lOYQ75V1gbcXCZ4qgy54Omg+zi/bSbIiw==",
+  "dgSpecHash": "U5pop2QPNerbLFZVxlm+QphxyX07uO5kQYG/0pcS02hbGnMLPnaddhCjTejzo+9w8HiwitD5b1edSdbY5QIHmA==",
   "success": true,
-  "projectFilePath": "D:\\Code\\.NET\\Open_Cv_Implementation\\OpenCvImplementation\\OpenCvImplementation\\OpenCvImplementation.csproj",
+  "projectFilePath": "D:\\Code\\.NET\\Colony_Counter_Standalone\\OpenCv_Implementation\\OpenCvImplementation\\OpenCvImplementation.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jorge\\.nuget\\packages\\microsoft.win32.systemevents\\7.0.0\\microsoft.win32.systemevents.7.0.0.nupkg.sha512",
     "C:\\Users\\jorge\\.nuget\\packages\\numsharp\\0.30.0\\numsharp.0.30.0.nupkg.sha512",

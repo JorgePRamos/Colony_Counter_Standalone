@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Code\\.NET\\Open_Cv_Implementation\\OpenCvImplementation\\OpenCvImplementation\\OpenCvImplementation.csproj": {}
+    "D:\\Code\\.NET\\Colony_Counter_Standalone\\OpenCv_Implementation\\OpenCvImplementation\\OpenCvImplementation.csproj": {}
   },
   "projects": {
-    "D:\\Code\\.NET\\Open_Cv_Implementation\\OpenCvImplementation\\OpenCvImplementation\\OpenCvImplementation.csproj": {
+    "D:\\Code\\.NET\\Colony_Counter_Standalone\\OpenCv_Implementation\\OpenCvImplementation\\OpenCvImplementation.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code\\.NET\\Open_Cv_Implementation\\OpenCvImplementation\\OpenCvImplementation\\OpenCvImplementation.csproj",
+        "projectUniqueName": "D:\\Code\\.NET\\Colony_Counter_Standalone\\OpenCv_Implementation\\OpenCvImplementation\\OpenCvImplementation.csproj",
         "projectName": "OpenCvImplementation",
-        "projectPath": "D:\\Code\\.NET\\Open_Cv_Implementation\\OpenCvImplementation\\OpenCvImplementation\\OpenCvImplementation.csproj",
+        "projectPath": "D:\\Code\\.NET\\Colony_Counter_Standalone\\OpenCv_Implementation\\OpenCvImplementation\\OpenCvImplementation.csproj",
         "packagesPath": "C:\\Users\\jorge\\.nuget\\packages\\",
-        "outputPath": "D:\\Code\\.NET\\Open_Cv_Implementation\\OpenCvImplementation\\OpenCvImplementation\\obj\\",
+        "outputPath": "D:\\Code\\.NET\\Colony_Counter_Standalone\\OpenCv_Implementation\\OpenCvImplementation\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
