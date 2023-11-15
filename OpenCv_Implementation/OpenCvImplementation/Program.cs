@@ -225,7 +225,7 @@ namespace OpenCvTest
           NDArray plateMask = np.zeros((procImage.Size().Width, procImage.Size().Height), np.uint8);
           Scalar colorScalar = new Scalar(255);
           Console.WriteLine("Radius ---> " + (int)item.Radius);
-          Cv2.Circle(test, (int)item.Center.X, (int)item.Center.Y, (int)item.Radius - 62, colorScalar, thickness: -1);
+          Cv2.Circle(test, (int)item.Center.X, (int)item.Center.Y, (int)item.Radius - 25, colorScalar, thickness: -1);
           //output --> outputMask (Mask of the plate)
           if (debug == 1)
           {
@@ -251,7 +251,7 @@ namespace OpenCvTest
       string current = AppDomain.CurrentDomain.BaseDirectory;
       int amountToAnalyze = 1;
       string initialPath = "Img/plate_";
-      for (int i = 3; i <= i + amountToAnalyze; i++)
+      for (int i = 1; i <= i + amountToAnalyze; i++)
       {
         string imagePath = initialPath + i.ToString() + ".jpg";
         Console.WriteLine("---->  " + imagePath);
@@ -266,7 +266,7 @@ namespace OpenCvTest
         Cv2.WaitKey(0);
 
         watershedMethod(originalImage, maskedImage, debug: 1);
-
+        break;
       }
 
 
