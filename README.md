@@ -8,9 +8,11 @@ A laboratory conducts bacterial colony counting using Petri dishes. Currently, t
 
 
 ### Project structure
+```
 OpenCv_Implementation
-|    -- OpenCvImplementation
+|    OpenCvImplementation
 |   |   -- Runner.cs (Main)
 |   |   -- Image_Process.cs
 |   |   -- bin/Debug/net7.0/
 |   |   |    --Img (test Images)
+```
