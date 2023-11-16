@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace OpenCvTest
 {
-  class Program
+  class Image_Process
   {
     public static void watershedMethod(Mat originalImage, Mat processImage, int debug = 0)
     {
@@ -176,11 +176,6 @@ namespace OpenCvTest
     }
 
 
-
-
-
-
-
     public static Mat getPlateMask(Mat procImage, Mat originalImage, int debug = 0)
     {
 
@@ -189,8 +184,9 @@ namespace OpenCvTest
         Cv2.ImShow("Grey Image", procImage);
         Cv2.WaitKey(0);
       }
+
       //Binary conversion
-      double temp = Cv2.Threshold(procImage, procImage, 0, 255, ThresholdTypes.Binary | ThresholdTypes.Otsu);
+      Cv2.Threshold(procImage, procImage, 0, 255, ThresholdTypes.Binary | ThresholdTypes.Otsu);
       if (debug == 1)
       {
         Cv2.ImShow("Threshold Image", procImage);
@@ -206,72 +202,42 @@ namespace OpenCvTest
         Cv2.WaitKey(0);
       }
 
-      //Find disk 
+      //Find petri disk 
       //dp The inverse ratio of resolution. | min_dist = Minimum distance between detected centers. | param1 threshold internal Canny pram2 threshold center
       CircleSegment[] circles = Cv2.HoughCircles(procImage, HoughModes.Gradient, 1, procImage.Size().Width, minRadius: 100, param2: 10);
 
       if (circles.Any())
       {
 
-        Console.WriteLine($"Existing circles---> {circles.Count()}");
+        Console.WriteLine($">> Detected petri disk: {circles.Count()}");
+        //In case of multiple detected circles, order big to small and pick first
         circles.OrderDescending();
-        Mat outputMask = originalImage;
-        Mat test = Mat.Zeros(procImage.Size().Height, procImage.Size().Width, MatType.CV_8UC1);
+        
+        Mat plateMask = Mat.Zeros(procImage.Size().Height, procImage.Size().Width, MatType.CV_8UC1);
 
-        foreach (CircleSegment c in circles)
+        foreach (CircleSegment item in circles)
         {
-          CircleSegment item = c;
-          //Crop the image disk
-          NDArray plateMask = np.zeros((procImage.Size().Width, procImage.Size().Height), np.uint8);
-          Scalar colorScalar = new Scalar(255);
-          Console.WriteLine("Radius ---> " + (int)item.Radius);
-          Cv2.Circle(test, (int)item.Center.X, (int)item.Center.Y, (int)item.Radius - 25, colorScalar, thickness: -1);
-          //output --> outputMask (Mask of the plate)
+          //Create empty plate for mask
+          Console.WriteLine(">> Detected radius: " + (int)item.Radius);
+
+          //Draw detected circle negative in mask 
+          Cv2.Circle(plateMask, (int)item.Center.X, (int)item.Center.Y, (int)item.Radius - 25, Scalar.White, thickness: -1);
           if (debug == 1)
           {
-            Cv2.ImShow("Mask", test);
+            Cv2.ImShow("Mask", plateMask);
             Cv2.WaitKey(0);
           }
 
-
         }
 
-        return test;
+        return plateMask;
       }
-      Console.WriteLine("No existing circles");
+      Console.WriteLine(">> No detected petri plate.");
       return null;
 
 
     }
 
-
-    static void Main(string[] args)
-    {
-      Console.WriteLine("## Start ##");
-      string current = AppDomain.CurrentDomain.BaseDirectory;
-      int amountToAnalyze = 1;
-      string initialPath = "Img/plate_";
-      for (int i = 1; i <= i + amountToAnalyze; i++)
-      {
-        string imagePath = initialPath + i.ToString() + ".jpg";
-        Console.WriteLine("---->  " + imagePath);
-        Mat greyImage = Cv2.ImRead(imagePath, ImreadModes.Grayscale);
-        Mat originalImage = Cv2.ImRead(imagePath, ImreadModes.Color);
-        Cv2.ImShow("Grey", greyImage);
-        Mat plateMask = getPlateMask(greyImage, originalImage, debug: 0);
-        Mat maskedImage = greyImage;
-        Cv2.BitwiseAnd(greyImage, plateMask, maskedImage);
-        Cv2.ImShow("Applied Mask", maskedImage);
-
-        Cv2.WaitKey(0);
-
-        watershedMethod(originalImage, maskedImage, debug: 1);
-        break;
-      }
-
-
-
-    }
   }
 }
 
