@@ -21,6 +21,7 @@ namespace OpenCvTest
         Cv2.WaitKey(0);
       }
       //Cv2.AdaptiveThreshold(processImage, processImage, 255, AdaptiveThresholdTypes.MeanC, ThresholdTypes.Binary, 11, 2);
+
       Cv2.Threshold(processImage, processImage, 140, 255, ThresholdTypes.Binary);
 
       if (debug == 1)
@@ -68,7 +69,7 @@ namespace OpenCvTest
         Cv2.WaitKey(0);
       }
       */
-      Cv2.Erode(distanceTransform, distanceTransform, null);
+      Cv2.Erode(distanceTransform, distanceTransform, null, iterations: 3);
       if (debug == 1)
       {
         Cv2.ImShow("Erode", distanceTransform);
@@ -85,7 +86,9 @@ namespace OpenCvTest
       Mat sureBackground = new Mat();
       Cv2.Dilate(distanceTransform, sureBackground, kernel1, iterations: 3);
 
-      Cv2.Threshold(distanceTransform, distanceTransform, 0.7 * max, 255, ThresholdTypes.Binary);
+
+      //Cv2.Threshold(distanceTransform, distanceTransform, 0.27*max, 255, ThresholdTypes.Binary);
+      Cv2.Threshold(distanceTransform, distanceTransform, min, 255, ThresholdTypes.Binary);
       if (debug == 1)
       {
         Cv2.ImShow("Cool Thresholded", distanceTransform);
@@ -122,7 +125,7 @@ namespace OpenCvTest
 
 
       //Draw Markers
-      Scalar[] randomColors = new Scalar[100];
+      Scalar[] randomColors = new Scalar[800];
 
       // Generate random RGB values and fill the array with random colors
       Random rand = new Random();
@@ -234,7 +237,7 @@ namespace OpenCvTest
           Console.WriteLine(">> Detected radius: " + (int)item.Radius);
 
           //Draw detected circle negative in mask 
-          Cv2.Circle(plateMask, (int)item.Center.X, (int)item.Center.Y, (int)item.Radius - 25, Scalar.White, thickness: -1);
+          Cv2.Circle(plateMask, (int)item.Center.X, (int)item.Center.Y, (int)item.Radius - Convert.ToInt32(item.Radius*0.076), Scalar.White, thickness: -1);
 
 
         }

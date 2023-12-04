@@ -24,7 +24,9 @@ namespace OpenCvTest
 
             Console.WriteLine("Image ID: ");
             //string imageId = Console.ReadLine();
-            string imageId = "4";
+            string imageId = "2";
+
+
 
             string imagePath = initialPath+folder+ "/plate_" + imageType.ToLower() + "_" + imageId.ToString() + ".jpg";
             Console.WriteLine(">> Processing image: " + imagePath);
