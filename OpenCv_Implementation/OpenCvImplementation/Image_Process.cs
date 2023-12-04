@@ -214,6 +214,7 @@ namespace OpenCvTest
         circles.OrderDescending();
         
         Mat plateMask = Mat.Zeros(procImage.Size().Height, procImage.Size().Width, MatType.CV_8UC1);
+        
 
         foreach (CircleSegment item in circles)
         {
