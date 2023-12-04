@@ -185,26 +185,27 @@ namespace OpenCvTest
         Cv2.WaitKey(0);
       }
 
+      Mat binImage  =new Mat();
       //Binary conversion
-      Cv2.Threshold(procImage, procImage, 0, 255, ThresholdTypes.Binary | ThresholdTypes.Otsu);
+      Cv2.Threshold(procImage, binImage, 0, 255, ThresholdTypes.Binary | ThresholdTypes.Otsu);
       if (debug == 1)
       {
-        Cv2.ImShow("Threshold Image", procImage);
+        Cv2.ImShow("Threshold Image", binImage);
         Cv2.WaitKey(0);
       }
 
       //Remove noise
       Mat element = Cv2.GetStructuringElement(MorphShapes.Rect, new Size(2, 2));
-      Cv2.MorphologyEx(procImage, procImage, MorphTypes.Open, element);
+      Cv2.MorphologyEx(binImage, binImage, MorphTypes.Open, element);
       if (debug == 1)
       {
-        Cv2.ImShow("DeNoise Image", procImage);
+        Cv2.ImShow("DeNoise Image", binImage);
         Cv2.WaitKey(0);
       }
 
       //Find petri disk 
       //dp The inverse ratio of resolution. | min_dist = Minimum distance between detected centers. | param1 threshold internal Canny pram2 threshold center
-      CircleSegment[] circles = Cv2.HoughCircles(procImage, HoughModes.Gradient, 1, procImage.Size().Width, minRadius: 100, param2: 10);
+      CircleSegment[] circles = Cv2.HoughCircles(binImage, HoughModes.Gradient, 1, binImage.Size().Width, minRadius: 100, param2: 10);
 
       if (circles.Any())
       {
@@ -212,9 +213,9 @@ namespace OpenCvTest
         Console.WriteLine($">> Detected petri disk: {circles.Count()}");
         //In case of multiple detected circles, order big to small and pick first
         circles.OrderDescending();
-        
-        Mat plateMask = Mat.Zeros(procImage.Size().Height, procImage.Size().Width, MatType.CV_8UC1);
-        
+
+        Mat plateMask = Mat.Zeros(binImage.Size().Height, binImage.Size().Width, MatType.CV_8UC1);
+
 
         foreach (CircleSegment item in circles)
         {
@@ -223,12 +224,13 @@ namespace OpenCvTest
 
           //Draw detected circle negative in mask 
           Cv2.Circle(plateMask, (int)item.Center.X, (int)item.Center.Y, (int)item.Radius - 25, Scalar.White, thickness: -1);
-          if (debug == 1)
-          {
-            Cv2.ImShow("Mask", plateMask);
-            Cv2.WaitKey(0);
-          }
 
+
+        }
+        if (debug == 1)
+        {
+          Cv2.ImShow("Mask", plateMask);
+          Cv2.WaitKey(0);
         }
 
         return plateMask;

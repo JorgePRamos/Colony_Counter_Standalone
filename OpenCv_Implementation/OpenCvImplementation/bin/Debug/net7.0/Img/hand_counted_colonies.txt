@@ -1,0 +1,7 @@
+plate_d_1: 50
+plate_d_2: 83
+plate_d_2: 41
+Light:
+plate_l_1: 34
+plate_l_2: 35 (Reflejo)
+plate_l_4: (watermark)
