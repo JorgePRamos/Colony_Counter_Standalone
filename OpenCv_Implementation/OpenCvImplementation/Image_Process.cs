@@ -12,7 +12,22 @@ namespace OpenCvTest
     public static void watershedMethod(Mat originalImage, Mat processImage, int debug = 0)
     {
 
+      //Adaptive thresholding
 
+      Console.WriteLine("--->>  " + processImage.Type());
+      if (debug == 1)
+      {
+        Cv2.ImShow("Masked image (processImage)", processImage);
+        Cv2.WaitKey(0);
+      }
+      //Cv2.AdaptiveThreshold(processImage, processImage, 255, AdaptiveThresholdTypes.MeanC, ThresholdTypes.Binary, 11, 2);
+      Cv2.Threshold(processImage, processImage, 140, 255, ThresholdTypes.Binary);
+
+      if (debug == 1)
+      {
+        Cv2.ImShow("Threshold image", processImage);
+        Cv2.WaitKey(0);
+      }
       //Get border of components
       Mat dilate = processImage;
       Mat erode = processImage;
@@ -20,10 +35,6 @@ namespace OpenCvTest
       Cv2.Dilate(processImage, dilate, null);
       Cv2.Erode(dilate, erode, null);
       Mat border = dilate - erode;
-
-
-      Mat distanceCalc = new Mat();
-
 
 
       //Calculate distance transform of Thresh image
@@ -185,7 +196,7 @@ namespace OpenCvTest
         Cv2.WaitKey(0);
       }
 
-      Mat binImage  =new Mat();
+      Mat binImage = new Mat();
       //Binary conversion
       Cv2.Threshold(procImage, binImage, 0, 255, ThresholdTypes.Binary | ThresholdTypes.Otsu);
       if (debug == 1)

@@ -18,13 +18,13 @@ namespace OpenCvTest
             //Images for analysis
             Console.WriteLine("Type of image? \n Dark [D] /Light [L]: ");
             //string imageType = Console.ReadLine();
-            string imageType = "L";
+            string imageType = "d";
             string folder = "Dark";
             if (imageType.ToLower() == "l") folder = "Light";
 
             Console.WriteLine("Image ID: ");
             //string imageId = Console.ReadLine();
-            string imageId = "1";
+            string imageId = "4";
 
             string imagePath = initialPath+folder+ "/plate_" + imageType.ToLower() + "_" + imageId.ToString() + ".jpg";
             Console.WriteLine(">> Processing image: " + imagePath);
@@ -35,18 +35,15 @@ namespace OpenCvTest
             Mat originalImage = Cv2.ImRead(imagePath, ImreadModes.Color);
 
             //Get plate mask
-            Mat plateMask = Image_Process.getPlateMask(greyImage, originalImage, debug: 1);
+            Mat plateMask = Image_Process.getPlateMask(greyImage, originalImage, debug: 0);
 
             //Apply mask to grey image
             Mat maskedImage = new Mat();
             Cv2.BitwiseAnd(greyImage, plateMask, maskedImage);
 
 
-            Cv2.ImShow("Applied Mask", maskedImage);
-            Cv2.WaitKey(0);
-
             //Perform watershed on original
-            Image_Process.watershedMethod(originalImage, maskedImage, debug: 0);
+            Image_Process.watershedMethod(originalImage, maskedImage, debug: 1);
 
 
 
